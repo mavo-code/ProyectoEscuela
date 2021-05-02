@@ -1,0 +1,16 @@
+D:\DevOps\Fundamentos_csharp_netcore\proyecto escuela\bin\Debug\net5.0\proyecto escuela.exe
+D:\DevOps\Fundamentos_csharp_netcore\proyecto escuela\bin\Debug\net5.0\proyecto escuela.deps.json
+D:\DevOps\Fundamentos_csharp_netcore\proyecto escuela\bin\Debug\net5.0\proyecto escuela.runtimeconfig.json
+D:\DevOps\Fundamentos_csharp_netcore\proyecto escuela\bin\Debug\net5.0\proyecto escuela.runtimeconfig.dev.json
+D:\DevOps\Fundamentos_csharp_netcore\proyecto escuela\bin\Debug\net5.0\proyecto escuela.dll
+D:\DevOps\Fundamentos_csharp_netcore\proyecto escuela\bin\Debug\net5.0\ref\proyecto escuela.dll
+D:\DevOps\Fundamentos_csharp_netcore\proyecto escuela\bin\Debug\net5.0\proyecto escuela.pdb
+D:\DevOps\Fundamentos_csharp_netcore\proyecto escuela\obj\Debug\net5.0\proyecto escuela.csprojAssemblyReference.cache
+D:\DevOps\Fundamentos_csharp_netcore\proyecto escuela\obj\Debug\net5.0\proyecto escuela.GeneratedMSBuildEditorConfig.editorconfig
+D:\DevOps\Fundamentos_csharp_netcore\proyecto escuela\obj\Debug\net5.0\proyecto escuela.AssemblyInfoInputs.cache
+D:\DevOps\Fundamentos_csharp_netcore\proyecto escuela\obj\Debug\net5.0\proyecto escuela.AssemblyInfo.cs
+D:\DevOps\Fundamentos_csharp_netcore\proyecto escuela\obj\Debug\net5.0\proyecto escuela.csproj.CoreCompileInputs.cache
+D:\DevOps\Fundamentos_csharp_netcore\proyecto escuela\obj\Debug\net5.0\proyecto escuela.dll
+D:\DevOps\Fundamentos_csharp_netcore\proyecto escuela\obj\Debug\net5.0\ref\proyecto escuela.dll
+D:\DevOps\Fundamentos_csharp_netcore\proyecto escuela\obj\Debug\net5.0\proyecto escuela.pdb
+D:\DevOps\Fundamentos_csharp_netcore\proyecto escuela\obj\Debug\net5.0\proyecto escuela.genruntimeconfig.cache
