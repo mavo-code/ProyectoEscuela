@@ -1,30 +1,14 @@
 ﻿using System;
+using proyecto_escuela.Entidades;
 
 namespace proyecto_escuela
 {
-    
-    class clsEscuela
-    {
-        public string nombreEscuela { get; set; }
-
-        public string direccion { get; set; }
-
-        public int añoFundacion { get; set; }
-
-        public void timbrar()
-        {
-            Console.Beep(1000, 3000);
-        }
-
-    }
     class Program
     {
         static void Main(string[] args)
         {
-            clsEscuela _escuela = new clsEscuela();
-
-            _escuela.timbrar();
-            // Console.WriteLine("Hello World!");
+            var escuela = new Escuela("Platzi Academy", 2011, TiposEscuela.Primaria, pais: "Mexico", ciudad: "Cuernavaca");
+            Console.WriteLine(escuela.ToString());
         }
     }
 }
