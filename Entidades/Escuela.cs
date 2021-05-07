@@ -17,6 +17,8 @@ namespace proyecto_escuela.Entidades
         
         public TiposEscuela tipoEscuela { get; set; }
 
+        public Curso[] cursos { get; set; }
+
         public Escuela (string nombreEscuela, int anioDeCreacion) => (_nombre, this.anioDeCreacion) = (nombreEscuela, anioDeCreacion);
 
         public Escuela(string nombreEscuela, int anioDeCreacion, TiposEscuela tipoEscuela, string pais = "", string ciudad = "")
