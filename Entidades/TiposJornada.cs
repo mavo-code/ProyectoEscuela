@@ -1,7 +1,9 @@
 namespace proyecto_escuela.Entidades
 {
-    public class TiposJornada
-    {
-        
+    public enum TiposJornada
+    { 
+        Mañana,
+        Tarde,
+        Noche
     }
 }
