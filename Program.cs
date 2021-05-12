@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using proyecto_escuela.Entidades;
+﻿using proyecto_escuela.Entidades;
+using proyecto_escuela.App;
 using static System.Console;
+using proyecto_escuela.Util;
 
 namespace proyecto_escuela
 {
@@ -9,33 +9,12 @@ namespace proyecto_escuela
     {
         static void Main(string[] args)
         {
-            var escuela = new Escuela("Platzi Academy", 2011, TiposEscuela.Primaria, pais: "Mexico", ciudad: "Cuernavaca");
-            Console.WriteLine(escuela.ToString());
+            var _engine = new EscuelaEngine();
+            _engine.Inicializar();
+            Printer.writeTitle("BIENVENIDOS A LA ESCUELA");
+            Printer.beep(10000, 500, 10);
 
-            escuela.cursos = new List<Curso>(){
-                new Curso(){nombre = "101", jornada = TiposJornada.Mañana},
-                new Curso(){nombre = "201", jornada = TiposJornada.Mañana},
-                new Curso(){nombre = "301", jornada = TiposJornada.Mañana}
-            };
-
-            escuela.cursos.Add(new Curso() {nombre= "102", jornada = TiposJornada.Tarde});
-            escuela.cursos.Add(new Curso() {nombre= "202", jornada = TiposJornada.Tarde});
-
-            var otraColeccion = new List<Curso>(){
-                new Curso(){nombre = "401", jornada = TiposJornada.Mañana},
-                new Curso(){nombre = "501", jornada = TiposJornada.Mañana},
-                new Curso(){nombre = "501", jornada = TiposJornada.Tarde}
-            };
-
-            escuela.cursos.AddRange(otraColeccion);
-
-            // escuela.cursos.RemoveAll(delegate (Curso _curso) {
-            //                             return _curso.nombre == "301";
-            //                         });
-
-            // escuela.cursos.RemoveAll((_curso) => _curso.nombre == "501" && _curso.jornada == TiposJornada.Tarde);   
-
-            imprimirCursosEscuela(escuela);
+            imprimirCursosEscuela(_engine._escuela);
         }
 
         /// <summary>
@@ -44,9 +23,7 @@ namespace proyecto_escuela
         /// <param name="escuela">objeto de tipo escuela con la informacion de los cursos</param>
         private static void imprimirCursosEscuela(Escuela escuela)
         {
-            WriteLine("=============================");
-            WriteLine("Cursos de la escuela");
-            WriteLine("=============================");
+            Printer.writeTitle("Cursos de la escuela");
 
             if (escuela?.cursos != null)
             {
