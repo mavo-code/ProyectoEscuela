@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+
 namespace proyecto_escuela.Entidades
 {
     ///Clase con las propiedades de curso
@@ -9,6 +11,10 @@ namespace proyecto_escuela.Entidades
         public string nombre { get; set; }
 
         public TiposJornada jornada { get; set; }
+
+        public List<Asignatura> asignaturtas { get; set; }
+
+        public List<Alumno> alumnos { get; set; }
 
         public Curso() => (uniqueId) = (Guid.NewGuid().ToString());
     }

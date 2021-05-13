@@ -16,6 +16,30 @@ namespace proyecto_escuela.App
         {
             _escuela = new Escuela("Platzi Academy", 2011, TiposEscuela.Primaria, pais: "Mexico", ciudad: "Cuernavaca");
 
+            cargarCursos();
+            cargarAsignaturas();
+            cargarAlumnos();
+            cargarEvaluaciones();
+
+        }
+
+        private void cargarEvaluaciones()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void cargarAsignaturas()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void cargarAlumnos()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void cargarCursos()
+        {
             _escuela.cursos = new List<Curso>(){
                 new Curso(){nombre = "101", jornada = TiposJornada.Mañana},
                 new Curso(){nombre = "201", jornada = TiposJornada.Mañana},
@@ -23,7 +47,6 @@ namespace proyecto_escuela.App
                 new Curso(){nombre = "401", jornada = TiposJornada.Tarde},
                 new Curso(){nombre = "501", jornada = TiposJornada.Tarde},
             };
-
         }
     }
 }

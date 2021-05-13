@@ -1,9 +1,13 @@
+using System;
 using System.Collections.Generic;
 
 namespace proyecto_escuela.Entidades
 {
     public class Escuela
     {
+
+        public string uniqueId { get; private set; } = Guid.NewGuid().ToString();
+
         private string _nombre;
         public string nombre
         {

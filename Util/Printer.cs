@@ -1,5 +1,5 @@
-using System;
 using static System.Console;
+
 namespace proyecto_escuela.Util
 {
     /// <summary>
@@ -25,7 +25,7 @@ namespace proyecto_escuela.Util
         {
             while(cantidad-- > 0)
             {
-                Console.Beep(hz, tiempo);
+                Beep(hz, tiempo);
             }
         }
     }
