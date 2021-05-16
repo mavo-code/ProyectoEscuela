@@ -12,7 +12,7 @@ namespace proyecto_escuela
             var _engine = new EscuelaEngine();
             _engine.Inicializar();
             Printer.writeTitle("BIENVENIDOS A LA ESCUELA");
-            Printer.beep(10000, 500, 10);
+            // Printer.beep(10000, 500, 10);
 
             imprimirCursosEscuela(_engine._escuela);
         }

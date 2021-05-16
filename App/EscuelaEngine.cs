@@ -25,7 +25,49 @@ namespace proyecto_escuela.App
 
         private void cargarEvaluaciones()
         {
-            throw new NotImplementedException();
+            foreach (var _curso in _escuela.cursos)
+            {
+
+                foreach (var _asignatura in _curso.asignaturas)
+                {
+                    foreach (var _alumno in _curso.alumnos)
+                    {
+                        var _listaEvaluaciones = generarValoresEvaluaciones();
+                        int _parcial = 1;
+
+                        foreach (var _evaluacion in _listaEvaluaciones)
+                        {
+                            _alumno.evaluaciones.Add(new Evaluaciones()
+                            {
+                                alumno = _alumno,
+                                asignatura = _asignatura,
+                                nombre = $"Evaluacion de {_asignatura.nombre} correspondiente al parcial {_parcial}",
+                                nota = _evaluacion
+                            });
+
+                            _parcial ++;
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Genera los valores de las evaluaciones de las asignaturas
+        /// </summary>
+        /// <param name="cantidad">cantidad de calificaciones que se generaran  (Opcional)</param>
+        /// <returns></returns>
+        private List<float> generarValoresEvaluaciones(int cantidad = 5)
+        {
+            float _value = 0;
+            List<float> _result = new List<float>();
+
+            for (int i = 0; i < cantidad; i++)
+            {
+                _value = (float)(5 * new Random().NextDouble());
+                _result.Add(_value);
+            }
+            return _result;
         }
 
         /// <summary>
@@ -43,7 +85,7 @@ namespace proyecto_escuela.App
                     new Asignatura(){nombre = "Ciencias Naturales"},
                     new Asignatura(){nombre = "Historia"}
                 };
-                _curso.asignaturtas = listaAsignaturas;
+                _curso.asignaturas = listaAsignaturas;
             }
         }
 
