@@ -7,7 +7,7 @@ namespace proyecto_escuela.Util
     /// </summary>
     public static class Printer
     {
-        public static void dibujarLinea(int tamano = 10)
+        public static void drawLine(int tamano = 10)
         {
             WriteLine("".PadLeft(tamano, '='));
         }
@@ -15,9 +15,9 @@ namespace proyecto_escuela.Util
         public static void writeTitle(string title)
         {
             var _tamano = title.Length + 4;
-            dibujarLinea(_tamano);
+            drawLine(_tamano);
             WriteLine($"| {title} |");
-            dibujarLinea(_tamano);
+            drawLine(_tamano);
         }
 
 

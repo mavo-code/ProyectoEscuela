@@ -5,7 +5,7 @@ using proyecto_escuela.Entidades;
 
 namespace proyecto_escuela.App
 {
-    public class EscuelaEngine
+    public sealed class EscuelaEngine
     {
         public Escuela _escuela { get; set; }
 
@@ -27,7 +27,6 @@ namespace proyecto_escuela.App
         {
             foreach (var _curso in _escuela.cursos)
             {
-
                 foreach (var _asignatura in _curso.asignaturas)
                 {
                     foreach (var _alumno in _curso.alumnos)
@@ -37,7 +36,7 @@ namespace proyecto_escuela.App
 
                         foreach (var _evaluacion in _listaEvaluaciones)
                         {
-                            _alumno.evaluaciones.Add(new Evaluaciones()
+                            _alumno.evaluaciones.Add(new Evaluacion()
                             {
                                 alumno = _alumno,
                                 asignatura = _asignatura,
