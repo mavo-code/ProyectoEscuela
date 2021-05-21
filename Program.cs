@@ -15,21 +15,7 @@ namespace proyecto_escuela
             // Printer.beep(10000, 500, 10);
             imprimirCursosEscuela(_engine._escuela);
 
-            Printer.drawLine(20);
-            Printer.writeTitle("Pruebas de polimorfismo");
-
-            Alumno _alumno = new Alumno(){nombre = "Oscar Alumno"};
-            WriteLine($"Alumno: {_alumno.nombre}");
-            WriteLine($"Alumno: {_alumno.uniqueId}");
-
-
-            ObjectoEscuelaBase _objEscuela = _alumno;
-            WriteLine($"objetoEscuela: {_objEscuela.nombre}");
-            WriteLine($"objetoEscuela: {_objEscuela.uniqueId}");
-
-            _alumno = (Alumno)_objEscuela;
-            WriteLine($"Alumno: {_alumno.nombre}");
-            WriteLine($"Alumno: {_alumno.uniqueId}");
+            var _listaObjetosEscuela = _engine.getObjetosListaBAse();
         }
 
         /// <summary>

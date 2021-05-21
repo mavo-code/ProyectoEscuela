@@ -9,5 +9,10 @@ namespace proyecto_escuela.Entidades
         public Asignatura asignatura { get; set; }
 
         public float nota { get; set; }
+
+        public override string ToString()
+        {
+            return $"{nota}, {alumno.nombre} {asignatura.nombre}";
+        }
     }
 }
