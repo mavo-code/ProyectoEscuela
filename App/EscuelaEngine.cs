@@ -23,6 +23,37 @@ namespace proyecto_escuela.App
 
         }
 
+        /// <summary>
+        /// Obtiene la lista polimorfica de los objetos que heredan de la clase padre.
+        /// </summary>
+        /// <returns></returns>
+        public List<ObjectoEscuelaBase> getObjetosListaBAse()
+        {
+            List<ObjectoEscuelaBase> _resultado = new List<ObjectoEscuelaBase>();
+            _resultado.Add(_escuela);
+            _resultado.AddRange(_escuela.cursos);
+
+            foreach (var _curso in _escuela.cursos)
+            {
+                _resultado.AddRange(_curso.asignaturas);
+                _resultado.AddRange(_curso.alumnos);
+
+                foreach (var _alumno in _curso.alumnos)
+                {
+                    _resultado.AddRange(_alumno.evaluaciones);
+                }
+            }
+
+
+            return _resultado;
+        }
+
+
+        #region funciones de carga
+
+        /// <summary>
+        /// Carga las evaluaciones de alumnos por curso por asignatura
+        /// </summary>
         private void cargarEvaluaciones()
         {
             foreach (var _curso in _escuela.cursos)
@@ -49,31 +80,6 @@ namespace proyecto_escuela.App
                     }
                 }
             }
-        }
-
-        /// <summary>
-        /// Obtiene la lista polimorfica de los objetos que heredan de la clase padre.
-        /// </summary>
-        /// <returns></returns>
-        public List<ObjectoEscuelaBase> getObjetosListaBAse()
-        {
-            List<ObjectoEscuelaBase> _resultado = new List<ObjectoEscuelaBase>();
-            _resultado.Add(_escuela);
-            _resultado.AddRange(_escuela.cursos);
-
-            foreach (var _curso in _escuela.cursos)
-            {
-                _resultado.AddRange(_curso.asignaturas);
-                _resultado.AddRange(_curso.alumnos);
-
-                foreach (var _alumno in _curso.alumnos)
-                {
-                    _resultado.AddRange(_alumno.evaluaciones);
-                }
-            }
-
-
-            return _resultado;
         }
 
         /// <summary>
@@ -126,9 +132,9 @@ namespace proyecto_escuela.App
             var _listaAlumnos = from n1 in nombre1
                                 from n2 in nombre2
                                 from a1 in apellido1
-                                select new Alumno{nombre=$"{n1} {n2} {a1}"};
+                                select new Alumno { nombre = $"{n1} {n2} {a1}" };
 
-            return _listaAlumnos.OrderBy((alumno)=>alumno.uniqueId).Take(cantidadAlumnos).ToList();
+            return _listaAlumnos.OrderBy((alumno) => alumno.uniqueId).Take(cantidadAlumnos).ToList();
         }
 
         /// <summary>
@@ -152,5 +158,7 @@ namespace proyecto_escuela.App
                 _curso.alumnos = generarAlumnosAleatorios(cantidadRandom);
             }
         }
+
+        #endregion
     }
 }

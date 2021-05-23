@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using proyecto_escuela.Util;
 
 namespace proyecto_escuela.Entidades
 {
-    public class Escuela : ObjectoEscuelaBase
+    public class Escuela : ObjectoEscuelaBase, ILugar
     {
         public int anioDeCreacion { get; set; }
         
@@ -14,6 +15,7 @@ namespace proyecto_escuela.Entidades
         public TiposEscuela tipoEscuela { get; set; }
 
         public List<Curso> cursos { get; set; }
+        public string direccion { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public Escuela (string nombreEscuela, int anioDeCreacion) => (nombre, this.anioDeCreacion) = (nombreEscuela, anioDeCreacion);
 
@@ -30,5 +32,15 @@ namespace proyecto_escuela.Entidades
             return $"Nombre: \"{nombre}\", Año: {anioDeCreacion}, Pais: {pais}, {System.Environment.NewLine} Ciudad: {ciudad}, Tipo de escuela: {tipoEscuela}";
         }
 
+        public void limpiarLuagr()
+        {
+            Printer.drawLine();
+            Printer.writeTitle("Limpiando el escuela...");
+            foreach (var curso in cursos)
+            {   
+                curso.limpiarLuagr();
+            }
+            Printer.writeTitle($"Escuela {nombre} limpio");
+        }
     }
 }

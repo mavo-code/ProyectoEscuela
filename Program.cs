@@ -2,6 +2,7 @@
 using proyecto_escuela.App;
 using static System.Console;
 using proyecto_escuela.Util;
+using System.Linq;
 
 namespace proyecto_escuela
 {
@@ -16,6 +17,12 @@ namespace proyecto_escuela
             imprimirCursosEscuela(_engine._escuela);
 
             var _listaObjetosEscuela = _engine.getObjetosListaBAse();
+
+            var _listILugar = from obj in _listaObjetosEscuela
+                              where obj is ILugar
+                              select (ILugar) obj;
+
+            // _engine._escuela.limpiarLuagr();
         }
 
         /// <summary>
