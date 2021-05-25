@@ -23,6 +23,30 @@ namespace proyecto_escuela.App
 
         }
 
+        public List<ObjectoEscuelaBase> getObjetosListaBAse(bool  traerEvaluaciones)
+        {
+            List<ObjectoEscuelaBase> _resultado = new List<ObjectoEscuelaBase>();
+            _resultado.Add(_escuela);
+            _resultado.AddRange(_escuela.cursos);
+
+            foreach (var _curso in _escuela.cursos)
+            {
+                _resultado.AddRange(_curso.asignaturas);
+                _resultado.AddRange(_curso.alumnos);
+
+                if (traerEvaluaciones)
+                {
+                    foreach (var _alumno in _curso.alumnos)
+                    {
+                        _resultado.AddRange(_alumno.evaluaciones);
+                    }
+                }
+            }
+
+
+            return _resultado;
+        }
+
         /// <summary>
         /// Obtiene la lista polimorfica de los objetos que heredan de la clase padre.
         /// </summary>
