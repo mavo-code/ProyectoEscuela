@@ -23,48 +23,52 @@ namespace proyecto_escuela.App
 
         }
 
-        public List<ObjectoEscuelaBase> getObjetosListaBAse(bool  traerEvaluaciones)
+        /// <summary>
+        /// Obtiene el listados de los objetos creados de una escuela
+        /// </summary>
+        /// <param name="traerEvaluaciones">indica si debe traer las evaluaciones (Opcional)</param>
+        /// <param name="traerAlumnos">indica si debe de traer los alumnos (Opcional)</param>
+        /// <param name="traerAsignaturas">indica si debe traer las asignaturas (Opcional)</param>
+        /// <param name="traerCursos">indica si debe traer los cursos (Opcional)</param>
+        /// <returns></returns>
+        public List<ObjectoEscuelaBase>  getObjetosListaBAse(
+                out int conteoEvaluaciones,
+                out int conteoAlumnos,
+                out int conteoAsignaturas,
+                out int conteoCursos,
+                bool traerEvaluaciones = true,
+                bool traerAlumnos = true,
+                bool traerAsignaturas = true,
+                bool traerCursos = true)
         {
+            conteoEvaluaciones = conteoAlumnos = conteoAsignaturas = conteoCursos = 0;
+
             List<ObjectoEscuelaBase> _resultado = new List<ObjectoEscuelaBase>();
             _resultado.Add(_escuela);
-            _resultado.AddRange(_escuela.cursos);
+
+            if (traerAsignaturas)
+                _resultado.AddRange(_escuela.cursos);
+
+            conteoCursos += _escuela.cursos.Count();
 
             foreach (var _curso in _escuela.cursos)
             {
-                _resultado.AddRange(_curso.asignaturas);
-                _resultado.AddRange(_curso.alumnos);
+                conteoAsignaturas += _curso.asignaturas.Count();
+                conteoAlumnos += _curso.alumnos.Count();
+
+                if (traerAsignaturas)
+                    _resultado.AddRange(_curso.asignaturas);
+                    
+                if (traerAlumnos)
+                    _resultado.AddRange(_curso.alumnos);
 
                 if (traerEvaluaciones)
                 {
                     foreach (var _alumno in _curso.alumnos)
                     {
                         _resultado.AddRange(_alumno.evaluaciones);
+                        conteoEvaluaciones +=  _alumno.evaluaciones.Count;
                     }
-                }
-            }
-
-
-            return _resultado;
-        }
-
-        /// <summary>
-        /// Obtiene la lista polimorfica de los objetos que heredan de la clase padre.
-        /// </summary>
-        /// <returns></returns>
-        public List<ObjectoEscuelaBase> getObjetosListaBAse()
-        {
-            List<ObjectoEscuelaBase> _resultado = new List<ObjectoEscuelaBase>();
-            _resultado.Add(_escuela);
-            _resultado.AddRange(_escuela.cursos);
-
-            foreach (var _curso in _escuela.cursos)
-            {
-                _resultado.AddRange(_curso.asignaturas);
-                _resultado.AddRange(_curso.alumnos);
-
-                foreach (var _alumno in _curso.alumnos)
-                {
-                    _resultado.AddRange(_alumno.evaluaciones);
                 }
             }
 

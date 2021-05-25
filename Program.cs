@@ -16,13 +16,12 @@ namespace proyecto_escuela
             // Printer.beep(10000, 500, 10);
             imprimirCursosEscuela(_engine._escuela);
 
-            var _listaObjetosEscuela = _engine.getObjetosListaBAse();
-
-            var _listILugar = from obj in _listaObjetosEscuela
-                              where obj is ILugar
-                              select (ILugar) obj;
-
-            // _engine._escuela.limpiarLuagr();
+            var _listaObjetosEscuela = _engine.getObjetosListaBAse(
+                out int conteoEvaluaciones,
+                out int conteoAlumnos,
+                out int conteoAsignaturas,
+                out int conteoCursos
+            );
         }
 
         /// <summary>
