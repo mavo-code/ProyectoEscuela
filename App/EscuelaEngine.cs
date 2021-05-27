@@ -23,6 +23,16 @@ namespace proyecto_escuela.App
 
         }
 
+        public Dictionary<LlaveDiccionario, IEnumerable<ObjectoEscuelaBase>> getDiccionarioObjetos()
+        {
+            Dictionary<LlaveDiccionario, IEnumerable<ObjectoEscuelaBase>> _result = new Dictionary<LlaveDiccionario, IEnumerable<ObjectoEscuelaBase>>();
+
+            _result.Add(LlaveDiccionario.Escuela, new List<ObjectoEscuelaBase>(){_escuela});
+            _result.Add(LlaveDiccionario.Cursos, _escuela.cursos.Cast<ObjectoEscuelaBase>());
+
+            return _result;
+        }
+
         /// <summary>
         /// Obtiene el listados de los objetos creados de una escuela
         /// </summary>
@@ -31,7 +41,7 @@ namespace proyecto_escuela.App
         /// <param name="traerAsignaturas">indica si debe traer las asignaturas (Opcional)</param>
         /// <param name="traerCursos">indica si debe traer los cursos (Opcional)</param>
         /// <returns></returns>
-        public List<ObjectoEscuelaBase>  getObjetosListaBAse(
+        public  IReadOnlyList<ObjectoEscuelaBase>  getObjetosListaBAse(
                 out int conteoEvaluaciones,
                 out int conteoAlumnos,
                 out int conteoAsignaturas,

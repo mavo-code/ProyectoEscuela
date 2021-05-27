@@ -3,6 +3,7 @@ using proyecto_escuela.App;
 using static System.Console;
 using proyecto_escuela.Util;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace proyecto_escuela
 {
@@ -15,13 +16,6 @@ namespace proyecto_escuela
             Printer.writeTitle("BIENVENIDOS A LA ESCUELA");
             // Printer.beep(10000, 500, 10);
             imprimirCursosEscuela(_engine._escuela);
-
-            var _listaObjetosEscuela = _engine.getObjetosListaBAse(
-                out int conteoEvaluaciones,
-                out int conteoAlumnos,
-                out int conteoAsignaturas,
-                out int conteoCursos
-            );
         }
 
         /// <summary>
