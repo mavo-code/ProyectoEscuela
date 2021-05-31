@@ -23,6 +23,10 @@ namespace proyecto_escuela.App
 
         }
 
+        /// <summary>
+        /// Obtiene el diccionario de todos los elementos de las 
+        /// </summary>
+        /// <returns></returns>
         public Dictionary<LlaveDiccionario, IEnumerable<ObjectoEscuelaBase>> getDiccionarioObjetos()
         {
             Dictionary<LlaveDiccionario, IEnumerable<ObjectoEscuelaBase>> _result = new Dictionary<LlaveDiccionario, IEnumerable<ObjectoEscuelaBase>>();
@@ -30,6 +34,24 @@ namespace proyecto_escuela.App
             _result.Add(LlaveDiccionario.Escuela, new List<ObjectoEscuelaBase>(){_escuela});
             _result.Add(LlaveDiccionario.Cursos, _escuela.cursos.Cast<ObjectoEscuelaBase>());
 
+            var _listaTemporalAsignaturas = new List<Asignatura>();
+            var _listaTemporalEvaluaciones = new List<Evaluacion>();
+            var _listaTemporalAlumnos = new List<Alumno>();
+
+
+            foreach (var _cursos in _escuela.cursos)
+            {
+                _listaTemporalAsignaturas.AddRange(_cursos.asignaturas);
+                _listaTemporalAlumnos.AddRange(_cursos.alumnos);
+
+                foreach (var _alumno in _cursos.alumnos)
+                {
+                    _listaTemporalEvaluaciones.AddRange(_alumno.evaluaciones);
+                }
+            }
+            _result.Add(LlaveDiccionario.Asignaturas, _listaTemporalAsignaturas.Cast<ObjectoEscuelaBase>());
+            _result.Add(LlaveDiccionario.Alumnos, _listaTemporalAlumnos.Cast<ObjectoEscuelaBase>());
+            _result.Add(LlaveDiccionario.Evaluaciones, _listaTemporalEvaluaciones.Cast<ObjectoEscuelaBase>());
             return _result;
         }
 

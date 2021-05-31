@@ -16,6 +16,8 @@ namespace proyecto_escuela
             Printer.writeTitle("BIENVENIDOS A LA ESCUELA");
             // Printer.beep(10000, 500, 10);
             imprimirCursosEscuela(_engine._escuela);
+
+            var _diccionarioTemporal = _engine.getDiccionarioObjetos();
         }
 
         /// <summary>
