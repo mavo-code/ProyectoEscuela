@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using proyecto_escuela.Entidades;
+using proyecto_escuela.Util;
 
 namespace proyecto_escuela.App
 {
@@ -22,6 +23,33 @@ namespace proyecto_escuela.App
             cargarEvaluaciones();
 
         }
+
+        /// <summary>
+        /// Imprime los valores del diccionario con los elementos de la escuela
+        /// </summary>
+        /// <param name="diccionario">Listado con los elementos del diccionario (Obligatorio)</param>
+        public void imprimirDiccionario(Dictionary<LlaveDiccionario, IEnumerable<ObjectoEscuelaBase>> diccionario, bool imprimirEvaluaciones = false)
+        {
+            foreach (var elementoDiccionario in diccionario)
+            {
+                Printer.writeTitle(elementoDiccionario.Key.ToString());
+
+                foreach (var itemElementoDiccionario in elementoDiccionario.Value)
+                {
+                    if(itemElementoDiccionario is Evaluacion)
+                    {
+                        if(imprimirEvaluaciones)
+                            Console.WriteLine(itemElementoDiccionario.nombre);
+                    }
+                    else
+                    {
+                        Console.WriteLine(itemElementoDiccionario.nombre);
+                    }
+                }
+            }
+        }
+
+
 
         /// <summary>
         /// Obtiene el diccionario de todos los elementos de las 

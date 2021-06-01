@@ -18,6 +18,8 @@ namespace proyecto_escuela
             imprimirCursosEscuela(_engine._escuela);
 
             var _diccionarioTemporal = _engine.getDiccionarioObjetos();
+
+            _engine.imprimirDiccionario(_diccionarioTemporal);
         }
 
         /// <summary>
