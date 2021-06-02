@@ -12,7 +12,7 @@ namespace proyecto_escuela.Entidades
 
         public override string ToString()
         {
-            return $"{nota}, {alumno.nombre} {asignatura.nombre}";
+            return $"{nota}, {alumno.nombre}, {asignatura.nombre}";
         }
     }
 }

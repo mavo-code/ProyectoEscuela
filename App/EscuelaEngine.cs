@@ -30,20 +30,35 @@ namespace proyecto_escuela.App
         /// <param name="diccionario">Listado con los elementos del diccionario (Obligatorio)</param>
         public void imprimirDiccionario(Dictionary<LlaveDiccionario, IEnumerable<ObjectoEscuelaBase>> diccionario, bool imprimirEvaluaciones = false)
         {
-            foreach (var elementoDiccionario in diccionario)
+            foreach (var keyDiccionario in diccionario)
             {
-                Printer.writeTitle(elementoDiccionario.Key.ToString());
+                Printer.writeTitle(keyDiccionario.Key.ToString());
 
-                foreach (var itemElementoDiccionario in elementoDiccionario.Value)
+                foreach (var itemElementoDiccionario in keyDiccionario.Value)
                 {
-                    if(itemElementoDiccionario is Evaluacion)
+                    switch (keyDiccionario.Key)
                     {
-                        if(imprimirEvaluaciones)
+                        case LlaveDiccionario.Evaluaciones:
+                            if (imprimirEvaluaciones)
+                                Console.WriteLine(itemElementoDiccionario);
+                            break;
+                        case LlaveDiccionario.Escuela:
+                            Console.WriteLine($"Escuela: {itemElementoDiccionario}");
+                            break;
+                            case LlaveDiccionario.Alumnos:
+                            Console.WriteLine($"Alumno: {itemElementoDiccionario.nombre}");
+                            break;
+                        case LlaveDiccionario.Cursos:
+                            var _cursoTemporal = itemElementoDiccionario as Curso;
+                            if (_cursoTemporal != null)
+                            {
+                                int _cantidadAlumnos = ((Curso)itemElementoDiccionario).alumnos.Count;
+                                Console.WriteLine($"Curso: {itemElementoDiccionario.nombre}. Numero de alumnos: {_cantidadAlumnos}");
+                            }
+                            break;
+                        default:
                             Console.WriteLine(itemElementoDiccionario.nombre);
-                    }
-                    else
-                    {
-                        Console.WriteLine(itemElementoDiccionario.nombre);
+                            break;
                     }
                 }
             }
@@ -182,7 +197,7 @@ namespace proyecto_escuela.App
 
             for (int i = 0; i < cantidad; i++)
             {
-                _value = (float)(5 * new Random().NextDouble());
+                _value = MathF.Round(5 * (float)new Random().NextDouble(), 2);
                 _result.Add(_value);
             }
             return _result;
