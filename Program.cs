@@ -3,6 +3,8 @@ using proyecto_escuela.App;
 using static System.Console;
 using proyecto_escuela.Util;
 using System.Linq;
+using System.Collections.Generic;
+using System;
 
 namespace proyecto_escuela
 {
@@ -10,19 +12,25 @@ namespace proyecto_escuela
     {
         static void Main(string[] args)
         {
+            AppDomain.CurrentDomain.ProcessExit += AccionDelEvento;
+            AppDomain.CurrentDomain.ProcessExit += (Object, S) => Printer.beep(2000, 1000, 1);
+
             var _engine = new EscuelaEngine();
             _engine.Inicializar();
             Printer.writeTitle("BIENVENIDOS A LA ESCUELA");
             // Printer.beep(10000, 500, 10);
             imprimirCursosEscuela(_engine._escuela);
 
-            var _listaObjetosEscuela = _engine.getObjetosListaBAse();
+            var _diccionarioTemporal = _engine.getDiccionarioObjetos();
 
-            var _listILugar = from obj in _listaObjetosEscuela
-                              where obj is ILugar
-                              select (ILugar) obj;
+            _engine.imprimirDiccionario(_diccionarioTemporal, true);
+        }
 
-            // _engine._escuela.limpiarLuagr();
+        private static void AccionDelEvento(object sender, EventArgs e)
+        {
+            Printer.writeTitle("SALIENDO DEL SISTEMA");
+            Printer.beep(3000, 1000, 3);
+            Printer.writeTitle("SALIO");
         }
 
         /// <summary>

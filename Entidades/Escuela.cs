@@ -15,7 +15,7 @@ namespace proyecto_escuela.Entidades
         public TiposEscuela tipoEscuela { get; set; }
 
         public List<Curso> cursos { get; set; }
-        public string direccion { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string direccion { get; set; }
 
         public Escuela (string nombreEscuela, int anioDeCreacion) => (nombre, this.anioDeCreacion) = (nombreEscuela, anioDeCreacion);
 

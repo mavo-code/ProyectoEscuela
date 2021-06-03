@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using proyecto_escuela.Entidades;
+using proyecto_escuela.Util;
 
 namespace proyecto_escuela.App
 {
@@ -23,48 +24,126 @@ namespace proyecto_escuela.App
 
         }
 
-        public List<ObjectoEscuelaBase> getObjetosListaBAse(bool  traerEvaluaciones)
+        /// <summary>
+        /// Imprime los valores del diccionario con los elementos de la escuela
+        /// </summary>
+        /// <param name="diccionario">Listado con los elementos del diccionario (Obligatorio)</param>
+        public void imprimirDiccionario(Dictionary<LlaveDiccionario, IEnumerable<ObjectoEscuelaBase>> diccionario, bool imprimirEvaluaciones = false)
         {
+            foreach (var keyDiccionario in diccionario)
+            {
+                Printer.writeTitle(keyDiccionario.Key.ToString());
+
+                foreach (var itemElementoDiccionario in keyDiccionario.Value)
+                {
+                    switch (keyDiccionario.Key)
+                    {
+                        case LlaveDiccionario.Evaluaciones:
+                            if (imprimirEvaluaciones)
+                                Console.WriteLine(itemElementoDiccionario);
+                            break;
+                        case LlaveDiccionario.Escuela:
+                            Console.WriteLine($"Escuela: {itemElementoDiccionario}");
+                            break;
+                            case LlaveDiccionario.Alumnos:
+                            Console.WriteLine($"Alumno: {itemElementoDiccionario.nombre}");
+                            break;
+                        case LlaveDiccionario.Cursos:
+                            var _cursoTemporal = itemElementoDiccionario as Curso;
+                            if (_cursoTemporal != null)
+                            {
+                                int _cantidadAlumnos = ((Curso)itemElementoDiccionario).alumnos.Count;
+                                Console.WriteLine($"Curso: {itemElementoDiccionario.nombre}. Numero de alumnos: {_cantidadAlumnos}");
+                            }
+                            break;
+                        default:
+                            Console.WriteLine(itemElementoDiccionario.nombre);
+                            break;
+                    }
+                }
+            }
+        }
+
+
+
+        /// <summary>
+        /// Obtiene el diccionario de todos los elementos de las 
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<LlaveDiccionario, IEnumerable<ObjectoEscuelaBase>> getDiccionarioObjetos()
+        {
+            Dictionary<LlaveDiccionario, IEnumerable<ObjectoEscuelaBase>> _result = new Dictionary<LlaveDiccionario, IEnumerable<ObjectoEscuelaBase>>();
+
+            _result.Add(LlaveDiccionario.Escuela, new List<ObjectoEscuelaBase>(){_escuela});
+            _result.Add(LlaveDiccionario.Cursos, _escuela.cursos.Cast<ObjectoEscuelaBase>());
+
+            var _listaTemporalAsignaturas = new List<Asignatura>();
+            var _listaTemporalEvaluaciones = new List<Evaluacion>();
+            var _listaTemporalAlumnos = new List<Alumno>();
+
+
+            foreach (var _cursos in _escuela.cursos)
+            {
+                _listaTemporalAsignaturas.AddRange(_cursos.asignaturas);
+                _listaTemporalAlumnos.AddRange(_cursos.alumnos);
+
+                foreach (var _alumno in _cursos.alumnos)
+                {
+                    _listaTemporalEvaluaciones.AddRange(_alumno.evaluaciones);
+                }
+            }
+            _result.Add(LlaveDiccionario.Asignaturas, _listaTemporalAsignaturas.Cast<ObjectoEscuelaBase>());
+            _result.Add(LlaveDiccionario.Alumnos, _listaTemporalAlumnos.Cast<ObjectoEscuelaBase>());
+            _result.Add(LlaveDiccionario.Evaluaciones, _listaTemporalEvaluaciones.Cast<ObjectoEscuelaBase>());
+            return _result;
+        }
+
+        /// <summary>
+        /// Obtiene el listados de los objetos creados de una escuela
+        /// </summary>
+        /// <param name="traerEvaluaciones">indica si debe traer las evaluaciones (Opcional)</param>
+        /// <param name="traerAlumnos">indica si debe de traer los alumnos (Opcional)</param>
+        /// <param name="traerAsignaturas">indica si debe traer las asignaturas (Opcional)</param>
+        /// <param name="traerCursos">indica si debe traer los cursos (Opcional)</param>
+        /// <returns></returns>
+        public  IReadOnlyList<ObjectoEscuelaBase>  getObjetosListaBAse(
+                out int conteoEvaluaciones,
+                out int conteoAlumnos,
+                out int conteoAsignaturas,
+                out int conteoCursos,
+                bool traerEvaluaciones = true,
+                bool traerAlumnos = true,
+                bool traerAsignaturas = true,
+                bool traerCursos = true)
+        {
+            conteoEvaluaciones = conteoAlumnos = conteoAsignaturas = conteoCursos = 0;
+
             List<ObjectoEscuelaBase> _resultado = new List<ObjectoEscuelaBase>();
             _resultado.Add(_escuela);
-            _resultado.AddRange(_escuela.cursos);
+
+            if (traerAsignaturas)
+                _resultado.AddRange(_escuela.cursos);
+
+            conteoCursos += _escuela.cursos.Count();
 
             foreach (var _curso in _escuela.cursos)
             {
-                _resultado.AddRange(_curso.asignaturas);
-                _resultado.AddRange(_curso.alumnos);
+                conteoAsignaturas += _curso.asignaturas.Count();
+                conteoAlumnos += _curso.alumnos.Count();
+
+                if (traerAsignaturas)
+                    _resultado.AddRange(_curso.asignaturas);
+                    
+                if (traerAlumnos)
+                    _resultado.AddRange(_curso.alumnos);
 
                 if (traerEvaluaciones)
                 {
                     foreach (var _alumno in _curso.alumnos)
                     {
                         _resultado.AddRange(_alumno.evaluaciones);
+                        conteoEvaluaciones +=  _alumno.evaluaciones.Count;
                     }
-                }
-            }
-
-
-            return _resultado;
-        }
-
-        /// <summary>
-        /// Obtiene la lista polimorfica de los objetos que heredan de la clase padre.
-        /// </summary>
-        /// <returns></returns>
-        public List<ObjectoEscuelaBase> getObjetosListaBAse()
-        {
-            List<ObjectoEscuelaBase> _resultado = new List<ObjectoEscuelaBase>();
-            _resultado.Add(_escuela);
-            _resultado.AddRange(_escuela.cursos);
-
-            foreach (var _curso in _escuela.cursos)
-            {
-                _resultado.AddRange(_curso.asignaturas);
-                _resultado.AddRange(_curso.alumnos);
-
-                foreach (var _alumno in _curso.alumnos)
-                {
-                    _resultado.AddRange(_alumno.evaluaciones);
                 }
             }
 
@@ -118,7 +197,7 @@ namespace proyecto_escuela.App
 
             for (int i = 0; i < cantidad; i++)
             {
-                _value = (float)(5 * new Random().NextDouble());
+                _value = MathF.Round(5 * (float)new Random().NextDouble(), 2);
                 _result.Add(_value);
             }
             return _result;
