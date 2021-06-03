@@ -23,7 +23,11 @@ namespace proyecto_escuela
 
             var _diccionarioTemporal = _engine.getDiccionarioObjetos();
 
-            _engine.imprimirDiccionario(_diccionarioTemporal, true);
+            // _engine.imprimirDiccionario(_diccionarioTemporal, true);
+
+            var _reporteador = new Reporteador(_diccionarioTemporal);
+            _reporteador.getListaEvaluaciones();
+            _reporteador.getListaAsignaturas();
         }
 
         private static void AccionDelEvento(object sender, EventArgs e)
