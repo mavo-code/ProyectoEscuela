@@ -28,6 +28,7 @@ namespace proyecto_escuela
             var _reporteador = new Reporteador(_diccionarioTemporal);
             _reporteador.getListaEvaluaciones();
             _reporteador.getListaAsignaturas();
+            _reporteador.getDicccionarioAsignaturaPorEvaluaciones();
         }
 
         private static void AccionDelEvento(object sender, EventArgs e)
