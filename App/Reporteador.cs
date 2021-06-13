@@ -77,5 +77,65 @@ namespace proyecto_escuela.App
             return _diccionarioAsignaturaPorEvaluaciones;
         }
 
+        /// <summary>
+        /// Obtiene el reporte del promedio de alumnos por asignatura
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<string, IEnumerable<object>> getPromedioAlumnoPorAsignatura()
+        {
+            var _response = new Dictionary<string, IEnumerable<object>>();
+            var _asignaturaPorEvaluaciones = getDicccionarioAsignaturaPorEvaluaciones();
+
+            foreach (var _asignaturaEvaluacion in _asignaturaPorEvaluaciones)
+            {
+                var _alumnosPromedios = from _evaluacion in _asignaturaEvaluacion.Value
+                                        group _evaluacion by new {
+                                            _evaluacion.alumno.uniqueId,
+                                            _evaluacion.nombre
+                                            }
+                                        into grupoEvaluacionesAlumnos
+                                        select new AlumnoPromedio{
+                                            alumnoId = grupoEvaluacionesAlumnos.Key.uniqueId,
+                                            nombre = grupoEvaluacionesAlumnos.Key.nombre,
+                                            promedio = grupoEvaluacionesAlumnos.Average(x => x.nota)
+                                        };
+                _response.Add(_asignaturaEvaluacion.Key, _alumnosPromedios);
+            }
+
+            return _response;
+        }
+
+        /// <summary>
+        /// Obtiene el listado de top promedio solicitados
+        /// </summary>
+        /// <param name="_asignatura">nombre de la asignatura/param>
+        /// <param name="_numberTop">numero de registros que se desean devolver</param>
+        /// <returns></returns>
+        public Dictionary<string, IEnumerable<AlumnoPromedio>> getTopPromedioAlumnos(string _asignatura, int _numberTop)
+        {
+            var _response = new Dictionary<string, IEnumerable<AlumnoPromedio>>();
+            var _asignaturaPorEvaluaciones = getDicccionarioAsignaturaPorEvaluaciones();
+
+            var _topAlumnosPromedios = (from _topEvaluaciones in _asignaturaPorEvaluaciones.Where(x => x.Key == _asignatura).Select(y => y.Value).FirstOrDefault()
+                                        orderby _topEvaluaciones.nota descending
+                                        group _topEvaluaciones by new {
+                                                _topEvaluaciones.alumno.uniqueId,
+                                                _topEvaluaciones.nombre
+                                        }
+                                        into grupoTop
+                                        select new AlumnoPromedio{
+                                            alumnoId = grupoTop.Key.uniqueId,
+                                            nombre = grupoTop.Key.nombre,
+                                            promedio = grupoTop.Select(x => x.nota).FirstOrDefault()
+                                        }).Take(_numberTop);
+
+            _response.Add(_asignatura, _topAlumnosPromedios);
+
+
+            return _response;
+        }
+
+        
+
     }
 }

@@ -12,8 +12,8 @@ namespace proyecto_escuela
     {
         static void Main(string[] args)
         {
-            AppDomain.CurrentDomain.ProcessExit += AccionDelEvento;
-            AppDomain.CurrentDomain.ProcessExit += (Object, S) => Printer.beep(2000, 1000, 1);
+            // AppDomain.CurrentDomain.ProcessExit += AccionDelEvento;
+            // AppDomain.CurrentDomain.ProcessExit += (Object, S) => Printer.beep(2000, 1000, 1);
 
             var _engine = new EscuelaEngine();
             _engine.Inicializar();
@@ -29,6 +29,11 @@ namespace proyecto_escuela
             _reporteador.getListaEvaluaciones();
             _reporteador.getListaAsignaturas();
             _reporteador.getDicccionarioAsignaturaPorEvaluaciones();
+            var _listaPromedioPorAsignatura = _reporteador.getPromedioAlumnoPorAsignatura();
+            var _topPromedio = _reporteador.getTopPromedioAlumnos(_asignatura: "Matematicas", _numberTop: 10);
+
+
+            
         }
 
         private static void AccionDelEvento(object sender, EventArgs e)

@@ -28,5 +28,11 @@ namespace proyecto_escuela.Util
                 Beep(hz, tiempo);
             }
         }
+
+
+        public static void presioneEnter()
+        {
+            WriteLine("Presione Enter");
+        }
     }
 }
