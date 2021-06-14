@@ -32,7 +32,7 @@ namespace proyecto_escuela.Util
 
         public static void presioneEnter()
         {
-            WriteLine("Presione Enter");
+            WriteLine("Presione enter para continuar...");
         }
     }
 }
