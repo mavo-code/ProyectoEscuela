@@ -12,8 +12,8 @@ namespace proyecto_escuela
     {
         static void Main(string[] args)
         {
-            // AppDomain.CurrentDomain.ProcessExit += AccionDelEvento;
-            // AppDomain.CurrentDomain.ProcessExit += (Object, S) => Printer.beep(2000, 1000, 1);
+            AppDomain.CurrentDomain.ProcessExit += AccionDelEvento;
+            AppDomain.CurrentDomain.ProcessExit += (Object, S) => Printer.beep(2000, 1000, 1);
 
             var _engine = new EscuelaEngine();
             _engine.Inicializar();
@@ -31,6 +31,71 @@ namespace proyecto_escuela
             _reporteador.getDicccionarioAsignaturaPorEvaluaciones();
             var _listaPromedioPorAsignatura = _reporteador.getPromedioAlumnoPorAsignatura();
             var _topPromedio = _reporteador.getTopPromedioAlumnos(_asignatura: "Matematicas", _numberTop: 10);
+
+            var _listaPadre = new List<ObjectoEscuelaBase>();
+            var _listachild = new List<Alumno>()
+            {
+                new Alumno
+                {
+                    nombre = "juanito"
+                },
+                new Alumno
+                {
+                    nombre = "juanito"
+                },
+            };
+
+            _listaPadre.AddRange(_listachild.Cast<ObjectoEscuelaBase>());
+
+
+            // var _newEval = new Evaluacion();
+            // string _nombreAlumnoIngresado, _notaTexto;
+            // float _notaAlumno = 0;
+
+            // WriteLine("Ingrese el nombre del alumno");
+            // Printer.presioneEnter();
+
+            // _nombreAlumnoIngresado = Console.ReadLine();
+
+            // WriteLine("Ingrese la nota del alumno");
+            // Printer.presioneEnter();
+
+            // _notaTexto = Console.ReadLine();
+
+            // if (string.IsNullOrWhiteSpace(_notaTexto))
+            // {
+            //     Printer.writeTitle("El valor de la nota no puede ser vacio");
+            //     WriteLine("Saliendo del programa");
+            // }
+            // else
+            // {
+            //     try
+            //     {
+            //         _newEval.nota = float.Parse(_notaTexto);
+
+            //         if (_newEval.nota < 0 && _newEval.nota > 5)
+            //         {
+            //             new ArgumentException("El valor de  nota esta fuera de los rangos permitidos");
+            //         }
+            //     }
+            //     catch (ArgumentException _ex)
+            //     {
+            //         Printer.writeTitle(_ex.Message);
+            //         WriteLine("Saliendo del programa");
+            //     }
+            //     catch (System.Exception _o)
+            //     {
+            //         Printer.writeTitle("El valor de la nota no puede ser vacio");
+            //         WriteLine("Saliendo del programa");
+            //     }
+            //     finally
+            //     {
+
+            //     }
+
+            // }
+
+
 
 
             
