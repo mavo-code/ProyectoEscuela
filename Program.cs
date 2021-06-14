@@ -41,7 +41,7 @@ namespace proyecto_escuela
                 },
                 new Alumno
                 {
-                    nombre = "juanito"
+                    nombre = "pepito"
                 },
             };
 
